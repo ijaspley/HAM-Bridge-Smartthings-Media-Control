@@ -1,0 +1,59 @@
+/**
+ *  HAM and Switch2
+ *
+ *  Copyright 2017 Scottin Pollock
+ */
+
+definition(
+    name: "HAM and Switch2",
+    namespace: "HAM Bridge",
+    author: "Scottin Pollock",
+    description: "Sends a HAMBridge command when a switch is turned on, and another when it is off. For more information on HAM Bridge visit http://soletc.com/HAMBridge",
+    category: "My Apps",
+    iconUrl: "http://scottinpollock.us/stuff/STIcons/HB.png",
+    iconX2Url: "http://scottinpollock.us/stuff/STIcons/HB@2x.png")
+
+preferences {
+	section("When the following is turned on and off...") {
+		input name: "master", title: "Which Switch?", type: "capability.switch", required: true
+	}
+	section("Send this command to HAM Bridge"){
+		input "HAMBcommandOn", "text", title: "Command to send when turned on...", required: false
+		input "HAMBcommandOff", "text", title: "Command to send when turned off...", required: false
+		input "server", "text", title: "Server IP", description: "Your HAM Bridger Server IP", required: false
+		input "port", "number", title: "Port", description: "Port Number", required: false
+    }
+}
+
+def installed() {
+	subscribeToEvents()
+}
+
+def updated() {
+	unsubscribe()
+	subscribeToEvents()
+}
+
+def subscribeToEvents() {
+	subscribe(master, "switch.on", onHandler, [filterEvents: false])
+	subscribe(master, "switch.off", offHandler, [filterEvents: false])
+}
+
+def onHandler(evt) {
+    if (HAMBcommandOn) {
+    	def theCOM = settings.HAMBcommandOn
+        doHAMB(theCOM)
+    }
+}
+
+def offHandler(evt) {
+    if (HAMBcommandOff) {
+    	def theCOM = settings.HAMBcommandOff
+    	doHAMB(theCOM)
+    }
+}
+
+def doHAMB(theCOM) {
+	def ip = "${settings.server}:${settings.port}"
+	sendHubCommand(new physicalgraph.device.HubAction("""GET /?$theCOM HTTP/1.1\r\nHOST: $ip\r\n\r\n""", physicalgraph.device.Protocol.LAN))
+}
