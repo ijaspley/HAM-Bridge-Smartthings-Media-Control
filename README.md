@@ -1,9 +1,9 @@
-# HAM-Bridge-Smartthings
-Contains the Applescripts, Smartapps and Device Types for various HAM Bridge jobs via Smartthings
+# HAM-Bridge-Smartthings-Media-Control
+Contains the Smartapps and Device Types for Smartthings Media Control via HAM Bridge
 
-Install HAM Bridge
+Install HAM Bridge http://solutionsetcetera.com/about-ham-bridge.html
 
-Write the applescripts for Play iTunes, Pause iTunes, Skip Track iTunes, Back Track iTunes, Play Spotify, Pause Spotify, Skip Track Spotify, Back Track Spotify.
+Write the applescripts for Play iTunes, Pause iTunes, Skip Track iTunes, Back Track iTunes, Play Spotify, Pause Spotify, Skip Track Spotify, Back Track Spotify. For Spotify I used the commands I gained from installing Airfoil-API.
 
 Point HAM Bridge to each script and name it (no spaces).
 
@@ -19,4 +19,4 @@ Add the Media Controller device type and add it as a device.
 
 Add the Media Set Up smartapp and configure it, it will be under Marketplace > My Apps > Media Set Up.
 
-You will have a Smartthings Media Remote and can call on Alexa to turn on/off/skip/back for iTunes/Spotify.
+You will have a Smartthings Media Remote and can call on Alexa to turn on/off/skip/back for iTunes/Spotify, the buttons can also be added to Harmony Remotes.
