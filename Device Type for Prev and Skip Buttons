@@ -1,0 +1,59 @@
+/**
+ *  Copyright 2016 Michael Struck (simplified by ScottinPollock)
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License")
+ */
+metadata {
+	
+    definition (name: "Simulated Alexa Switch", namespace: "HAM Bridge", author: "Scottin Pollock") {
+		capability "Switch"
+        capability "Relay Switch"
+
+		command "onPhysical"
+		command "offPhysical"
+	}
+
+	tiles {
+		standardTile("switch", "device.switch", width: 2, height: 2, canChangeIcon: true) {
+			state "off", label: '${currentValue}', action: "switch.on", icon: "https://raw.githubusercontent.com/MichaelStruck/SmartThings/master/Other-SmartApps/AlexaHelper/AH-Off.png", backgroundColor: "#ffffff"
+			state "on", label: '${currentValue}', action: "switch.off", icon: "https://raw.githubusercontent.com/MichaelStruck/SmartThings/master/Other-SmartApps/AlexaHelper/AH-On.png", backgroundColor: "#79b821"
+		}
+		standardTile("on", "device.switch", decoration: "flat") {
+			state "default", label: 'On', action: "onPhysical", backgroundColor: "#ffffff"
+		}
+		standardTile("off", "device.switch", decoration: "flat") {
+			state "default", label: 'Off', action: "offPhysical", backgroundColor: "#ffffff"
+		}
+        main "switch"
+		details(["switch","on","off"])
+	}
+}
+
+def parse(String description) {
+	def pair = description.split(":")
+	createEvent(name: pair[0].trim(), value: pair[1].trim())
+}
+
+def on() {
+	log.debug "$version on()"
+	sendEvent(name: "switch", value: "on", isStateChange: true)
+}
+
+def off() {
+	log.debug "$version off()"
+	sendEvent(name: "switch", value: "off" ,isStateChange: true)
+}
+
+def onPhysical() {
+	log.debug "$version onPhysical()"
+	sendEvent(name: "switch", value: "on", type: "physical",isStateChange: true)
+}
+
+def offPhysical() {
+	log.debug "$version offPhysical()"
+	sendEvent(name: "switch", value: "off", type: "physical",isStateChange: true)
+}
+
+private getVersion() {
+	"PUBLISHED"
+}
