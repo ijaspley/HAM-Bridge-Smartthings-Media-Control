@@ -13,10 +13,10 @@ Add the devices (just name them and tick the drop down boxes), they will be unde
 
 Add the button smartapp (from code), it will be under Marketplace > My Apps > HAM and Switch 2
 
-Put your HAM Bridge commands into the smartapp, use on for play, off for pause, both for skip and prev.
+Put your HAM Bridge commands into the smartapp, use on for play, off for pause, both for skip and prev. You will need several instances of the smartapp configured (3 for each of iTunes and Spotify).
 
 Add the Media Controller device type and add it as a device.
 
-Add the Media Set Up smartapp and configure it, it will be under Marketplace > My Apps > Media Set Up.
+Add the Media Controller Config smartapp and configure it, it will be under Marketplace > My Apps > Media Set Up.
 
 You will have a Smartthings Media Remote and can call on Alexa to turn on/off/skip/back for iTunes/Spotify, the buttons can also be added to Harmony Remotes.
